@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.wc {
+  margin: 0 auto;
+  max-width: 1145px;
+}
+* {
+  font-family: "Golos Text";
+}
+header {
+  background-image: url("./assets/img/hBg.jpg");
+}
