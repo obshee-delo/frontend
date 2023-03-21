@@ -24,8 +24,8 @@ const Profile = () => {
   const [i, setI] = React.useState(1);
   return (
     <>
-      {!person ? (
       {/* {isLoggedIn ? ( */}
+      {!person ? (
         <Navigate to="/reg" />
       ) : (
         <section className="flex text-[#272523] flex-col justify-between h-auto sm:min-h-[100vh] bg-[#fdf2e5]">
