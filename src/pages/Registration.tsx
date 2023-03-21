@@ -1,14 +1,13 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLogo, changeName } from "../redux/checkRegistrationSlice";
 import { setHLogo } from "../redux/checkRegistrationSlice";
 import { images } from "../assets/img";
-
 import { Link, Navigate } from "react-router-dom";
 import { out, registrateUser, userState } from "../redux/userSLice";
 import Footer from "./../components/Footer";
+import { loginUser } from "./../redux/auth/actionCreator";
 const USER_REG = /^[a-zA-Z]{3,23}/;
-const REG_URL = "/reg";
 const PWD_REG = /(?=.*[a-z])(?=.*[а-я])(?=.*[A-Z])(?=.*[0-9]){8,23}/;
 const MAIL_REG = /(?=.*[.])(?=.*[@])/;
 const Registration = () => {
@@ -16,16 +15,16 @@ const Registration = () => {
   React.useEffect(() => {
     dispatch(changeLogo());
   }, [setHLogo]);
+  const [pwd, setPwd] = React.useState("");
+  const [user, setUser] = React.useState("");
   const [mail, setMail] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [vk, setVk] = React.useState("");
 
-  const [user, setUser] = React.useState("");
   const [validName, setValidName] = React.useState(false);
   const [userFocus, setUserFocus] = React.useState(false);
 
-  const [pwd, setPwd] = React.useState("");
   const [validPwd, setValidPwd] = React.useState(false);
   const [pwdFocus, setPwdrFocus] = React.useState(false);
 
@@ -37,70 +36,48 @@ const Registration = () => {
   const userRef = React.useRef(null);
   const errRef = React.useRef(null);
   const [mailT, setMailT] = React.useState("");
-  React.useEffect(() => {
-    const result = MAIL_REG.test(mail);
-    setMailT(result);
-  }, [mail]);
   // React.useEffect(() => {
-  //   userRef.current.focus();
-  // }, []);
-  React.useEffect(() => {
-    const result = USER_REG.test(user);
-    setValidName(result);
-  }, [user]);
-  React.useEffect(() => {
-    const result = PWD_REG.test(pwd);
-    setValidPwd(result);
-    const match = pwd === matchPwd;
-    setValidMatchPwd(match);
-  }, [pwd, matchPwd]);
-  React.useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd, matchPwd]);
+  //   const result = MAIL_REG.test(mail);
+  //   setMailT(result);
+  // }, [mail]);
+  // React.useEffect(() => {
+  //   const result = USER_REG.test(user);
+  //   setValidName(result);
+  // }, [user]);
+  // React.useEffect(() => {
+  //   const result = PWD_REG.test(pwd);
+  //   setValidPwd(result);
+  //   const match = pwd === matchPwd;
+  //   setValidMatchPwd(match);
+  // }, [pwd, matchPwd]);
+  // React.useEffect(() => {
+  //   setErrMsg("");
+  // }, [user, pwd, matchPwd]);
   const users = useSelector(userState);
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const v1 = USER_REG.test(user);
-  //   const v2 = PWD_REG.test(pwd);
-  //   if (v1 && v2) {
-  //     // setErrMsg("error, not valid");
-  //     // return;
-  //   }
-  //   try {
-  //     // const result = await axios.post(REG_URL, JSON.stringify({ user, pwd }), {
-  //     //   headers: {
-  //     //     "Content-Type": "application/json",
-  //     //   },
-  //     //   withCredentials: true,
-  //     // });
-  //     // console.log(result.data);
-  //   } catch (err) {
-  //     alert(err);
-  //   }
-  // };
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(registrateUser(pwd, user, lastName, mail, phone, vk));
+    // dispatch(registrateUser(pwd, user, lastName, mail, phone, vk));
+    dispatch(loginUser({ user, pwd }));
   };
-  React.useEffect(() => {
-    setRender(users.exist);
-    if (users.exist) {
-      setSuccess(true);
-    }
-  }, [users]);
-  const logOut = () => {
-    setSuccess(false);
-    dispatch(out());
-  };
-  React.useEffect(() => {
-    if (success) {
-      const name = users.exist.user;
-      dispatch(changeName({ name: name }));
-    }
-    if (!success) {
-      dispatch(changeName({ name: "Войти" }));
-    }
-  }, [success]);
+  // React.useEffect(() => {
+  //   setRender(users.exist);
+  //   if (users.exist) {
+  //     setSuccess(true);
+  //   }
+  // }, [users]);
+  // const logOut = () => {
+  //   setSuccess(false);
+  //   dispatch(out());
+  // };
+  // React.useEffect(() => {
+  //   if (success) {
+  //     const name = users.exist.user;
+  //     dispatch(changeName({ name: name }));
+  //   }
+  //   if (!success) {
+  //     dispatch(changeName({ name: "Войти" }));
+  //   }
+  // }, [success]);
   return (
     <>
       {users.exist ? (
@@ -228,9 +205,9 @@ const Registration = () => {
                         </span>
                       </div>
                       <button
-                        disabled={
-                          !validName || !mailT || !validPwd ? true : false
-                        }
+                        // disabled={
+                        //   !validName || !mailT || !validPwd ? true : false
+                        // }
                         className="py-[10px] rounded-[10px] w-full bg-[#272523] text-[#FFF4E6] flex justify-center items-center"
                       >
                         Зарегестрироваться

@@ -4,7 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Link, Outlet } from "react-router-dom";
 import { out, userState } from "../redux/userSLice";
 import UserProfile from "../components/UserProfile";
+import { IRootState } from "./../redux/state";
 const Profile = () => {
+  const profile = useSelector(
+    (state: IRootState) => state.auth.profileData.profile
+  );
+  const isLoggedIn = useSelector(
+    (state: IRootState) => !!state.auth.authData.accessToken
+  );
   const get = useSelector(userState);
   const dispacth = useDispatch();
   const person = get.exist;
@@ -18,6 +25,7 @@ const Profile = () => {
   return (
     <>
       {!person ? (
+      {/* {isLoggedIn ? ( */}
         <Navigate to="/reg" />
       ) : (
         <section className="flex text-[#272523] flex-col justify-between h-auto sm:min-h-[100vh] bg-[#fdf2e5]">
@@ -32,7 +40,7 @@ const Profile = () => {
                         : "text-[#d4cbbf] font-normal"
                     } cursor-pointer`}
                   >
-                    <Link to="profile">Профиль</Link>
+                    <Link to="profile">Профиль {profile}</Link>
                   </span>
                   <span
                     onClick={() => setI(0)}
