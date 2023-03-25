@@ -19,7 +19,7 @@ const Intensive = () => {
     dispatch(backLogo());
   }, [setHLogo]);
   return (
-    <div className="text-[#272523] bg-[#fef3e5]">
+    <div className="text-[#272523] bg-[#fef3e5] relative">
       <GeneralHeader
         useData=""
         subtitle="Обществознание"

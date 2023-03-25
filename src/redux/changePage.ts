@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IRootState } from "./state";
 
 const initialState = {
   courses: [],
@@ -17,4 +18,4 @@ const pageSLice = createSlice({
 });
 export default pageSLice.reducer;
 export const { changePage, backPage } = pageSLice.actions;
-export const coursesState = (state) => state.page.courses;
+export const coursesState = (state: IRootState) => state.page.courses;

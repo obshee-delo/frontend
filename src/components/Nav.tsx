@@ -3,8 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useSelector } from "react-redux";
-import { setHLogo, setName } from "../redux/checkRegistrationSlice";
-import { userState } from "../redux/userSLice";
+import { setHLogo } from "../redux/checkRegistrationSlice";
+import { selectAuth } from "./../redux/authSlice";
 const menu: { name: string; link: string }[] = [
   {
     name: "Главная",
@@ -20,9 +20,7 @@ const menu: { name: string; link: string }[] = [
   },
 ];
 const Nav: React.FC = () => {
-  const checIn = useSelector(userState);
-  const person = useSelector(userState);
-  const startName = useSelector(setName);
+  const { name } = useSelector(selectAuth);
   const getImg = useSelector(setHLogo);
   const [openMenu, setOpenMenu] = React.useState<boolean>(false);
   return (
@@ -57,11 +55,7 @@ const Nav: React.FC = () => {
             <div className="login flex items-center gap-[10px]">
               <AiOutlineUser className="text-[20px]" />
               <span className=" underline text-[12px] hidden sm:block">
-                <Link to="/reg">
-                  {person?.exist?.user
-                    ? `${person?.exist?.user} ${person?.exist?.lastName[0]}.`
-                    : "Войти"}
-                </Link>
+                <Link to="/reg">{name || "Войти"}</Link>
               </span>
             </div>
             <div

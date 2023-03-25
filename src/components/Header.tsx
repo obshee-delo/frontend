@@ -1,6 +1,7 @@
 import React from "react";
 import { header, headerList } from "../assets/text";
 import Marquee from "react-fast-marquee";
+import { toast } from "react-toastify";
 const Header: React.FC = () => {
   return (
     <header

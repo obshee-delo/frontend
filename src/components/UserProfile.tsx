@@ -1,21 +1,23 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { userState, addPicture } from "../redux/userSLice";
+import { useSelector } from "react-redux";
 import { images } from "../assets/img";
 import { AiFillPicture } from "react-icons/ai";
+import { selectAuth } from "./../redux/authSlice";
 
 const UserProfile: React.FC = () => {
-  const get = useSelector(userState);
-  const dispacth = useDispatch();
-  const person: {
-    user: string;
-    lastName: string;
-    mail: string;
-  } = get.exist;
+  const { name, sureName, password, email, link, phone } =
+    useSelector(selectAuth);
+  const data: { [key: string]: string | null } = {
+    name,
+    sureName,
+    password,
+    email,
+    link,
+    phone,
+  };
   const [fileImg, setFileImg] = React.useState(images.defaultPerson);
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setFileImg(URL.createObjectURL(e.target.files[0]));
-    // dispacth(addPicture(URL.createObjectURL(e.target.files[0]), person));
   };
   return (
     <section className="wc px-[15px]">
@@ -28,9 +30,9 @@ const UserProfile: React.FC = () => {
           />
           <div className="w-[195px] sm:w-auto pl-[10px] sm:pl-0">
             <span className="text-[#FC9F7D] inline-block text-[26px] font-semibold mb-[5px]">
-              {`${person.user} ${person.lastName}`}
+              {`${data.name} ${data.sureName}`}
             </span>
-            <p className="mb-[20px]">{person.mail}</p>
+            <p className="mb-[20px]">{data.email || "no data"}</p>
             <div className="flex relative">
               <input
                 className="max-w-[150px] w-[15px] mr-[15px]   h-[20px] relative z-[100] text-[0] p-[0] file:bg-transparent file:border-transparent border-none border-[0] border-transparent overflow-hidden  bg-transparent text-transparent"
@@ -58,7 +60,7 @@ const UserProfile: React.FC = () => {
                 disabled={true}
                 className="w-full bg-transparent"
                 name="name"
-                value={person.user}
+                value={data.name || "no data"}
                 type="text"
               />
             </div>
@@ -70,7 +72,7 @@ const UserProfile: React.FC = () => {
                 disabled={true}
                 className="w-full bg-transparent"
                 name="name"
-                value={person.lastName}
+                value={data.sureName || "no data"}
                 type="text"
               />
             </div>
@@ -82,7 +84,7 @@ const UserProfile: React.FC = () => {
                 disabled={true}
                 className="w-full bg-transparent"
                 name="name"
-                value={person.phone}
+                value={data.phone || "no data"}
                 type="text"
               />
             </div>
@@ -94,7 +96,7 @@ const UserProfile: React.FC = () => {
                 disabled={true}
                 className="w-full bg-transparent"
                 name="name"
-                value={person.mail}
+                value={data.phone || "no data"}
                 type="text"
               />
             </div>
@@ -112,7 +114,7 @@ const UserProfile: React.FC = () => {
                 disabled={true}
                 className="w-full bg-transparent"
                 name="name"
-                value={person.mail}
+                value={data.email || "no data"}
                 type="text"
               />
             </div>
@@ -124,7 +126,7 @@ const UserProfile: React.FC = () => {
                 disabled={true}
                 className="w-full bg-transparent"
                 name="name"
-                value={person.phone}
+                value={data.phone || "no data"}
                 type="text"
               />
             </div>

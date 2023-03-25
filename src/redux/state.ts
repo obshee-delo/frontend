@@ -1,22 +1,23 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import checkRegistrationSlice from "./checkRegistrationSlice";
-import userSLice from "./userSLice";
-import pageSLice from "./changePage";
-import logger from "redux-logger";
+import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import authReducer from "./auth/authReducer";
+import { setupListeners } from "@reduxjs/toolkit/query/react";
+import { authApi } from "../services/authApi";
+import checkRegistrationSlice from "./checkRegistrationSlice";
+import pageSLice from "./changePage";
+import authSlice from "./authSlice";
+import courseSlice from "./courseSlice";
 export const store = configureStore({
   reducer: {
+    cource: courseSlice,
     checkReg: checkRegistrationSlice,
-    users: userSLice,
     page: pageSLice,
-    auth: authReducer,
+    auth: authSlice,
+    [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      ...(process.env.NODE_ENV !== "production" ? [logger] : [])
-    ),
+    getDefaultMiddleware().concat(authApi.middleware),
 });
 export type IRootState = ReturnType<typeof store.getState>;
 export type appDispatch = typeof store.dispatch;
 export const useAppDispatch: () => appDispatch = useDispatch;
+setupListeners(store.dispatch);

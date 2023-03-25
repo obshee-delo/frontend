@@ -1,19 +1,14 @@
 import React from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-import { userState } from "../redux/userSLice";
 import { userCourses } from "../assets/text";
 import { changePage } from "../redux/changePage";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../redux/state";
 const UserCourse: React.FC = () => {
-  const get = useSelector(userState);
-  const dispacth = useDispatch();
-  const person = get.exist;
+  const dispacth = useAppDispatch();
   const [existC, setExistC] = React.useState<boolean>(true);
-  const sendTOCourse = (el) => {
+  const sendTOCourse = (el: any) => {
     dispacth(changePage(el));
   };
-  const additionCourses = useSelector((state) => state.page.courses);
   return (
     <section className="wc px-[15px] text-[#272523]">
       {existC ? (

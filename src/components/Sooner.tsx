@@ -10,7 +10,7 @@ import "swiper/css";
 import { soonCourse } from "../assets/text";
 
 const Sooner: React.FC = () => {
-  let count: number;
+  let count: number = 4;
   let screen = window.screen.width;
   if (screen > 1200) count = 4;
   if (screen < 1200 && screen > 850) count = 3;

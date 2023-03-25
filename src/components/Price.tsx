@@ -2,11 +2,18 @@ import React from "react";
 import { images } from "../assets/img";
 import { price } from "../assets/text";
 import Btn from "./Btn";
+import PaymentForm from "./PaymentForm";
 import Title from "./Title";
 
 const Price: React.FC = () => {
+  const [PriceId, setPriceId] = React.useState<null | number>(null);
+  const [open, setOpen] = React.useState<boolean>(false);
+  const show = (el: number | null) => {
+    setPriceId(el);
+    setOpen(true);
+  };
   return (
-    <section className="mb-[80px] md:mb-[120px] text-[#272523] relative">
+    <section className="mb-[80px]  md:mb-[120px] text-[#272523] relative">
       <div className="wc px-[15px]">
         <Title text="Стоимость интенсива" />
         <div className="grid min-h-full grid-cols-1 grid-rows-1 md:grid-cols-[1fr_1fr]  lg:grid-cols-[1fr_1fr_1fr] gap-[30px] md:grid-rows-[1fr_1fr] lg:grid-rows-[1fr_auto_auto]">
@@ -33,9 +40,13 @@ const Price: React.FC = () => {
                 {el.price}
               </span>
               {el.black ? (
-                <Btn changeColor={true} text="Приобрести" />
+                <div onClick={show.bind("", 1)}>
+                  <Btn changeColor={true} text="Приобрести" />
+                </div>
               ) : (
-                <Btn changeColor={false} text="Приобрести" />
+                <div onClick={show.bind("", 1)}>
+                  <Btn changeColor={false} text="Приобрести" />
+                </div>
               )}
               {el.black && (
                 <img
@@ -55,6 +66,8 @@ const Price: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <PaymentForm open={open} setOpen={setOpen} idB={PriceId} />
     </section>
   );
 };

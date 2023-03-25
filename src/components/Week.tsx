@@ -13,7 +13,7 @@ const WeekD: React.FC = () => {
   const saturday = week.filter((el) => el.day === "СБ");
   const sunday = week.filter((el) => el.day === "ВС");
   const [term, setTerm] = React.useState<string>("20 марта - 26 марта");
-  const toFilter = (el) => {
+  const toFilter = (el: any) => {
     setTerm(el);
   };
   const resultOfSort = [];

@@ -1,23 +1,27 @@
 import { Route, Routes, useParams } from "react-router-dom";
 import React from "react";
-import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import About from "./pages/About";
 import CertainCourse from "./pages/CertainCourse";
 import Course from "./pages/Course";
 import Main from "./pages/Main";
 import Intensive from "./pages/Intensive";
-import UserPage from "./pages/UserPage";
 import Registration from "./pages/Registration";
-import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import UserCourse from "./components/UserCourse";
 import UserProfile from "./components/UserProfile";
 import UserCourseDetail from "./pages/UserCourseDetail";
 import Videolessons from "./pages/Videolessons";
 import Video from "./components/Video";
+import { useAppDispatch } from "./redux/state";
+import { setUsers } from "./redux/authSlice";
 function App() {
   const { elN } = useParams();
+  const dispatch = useAppDispatch();
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  React.useEffect(() => {
+    dispatch(setUsers(user));
+  }, []);
   return (
     <div className="min-h-[100vh] max-w-[100vw] overflow-x-hidden flex flex-col">
       <Nav />
@@ -30,7 +34,6 @@ function App() {
           <Route path="course/*" element={<Course />} />
           <Route path="intensive" element={<Intensive />} />
           <Route path="reg" element={<Registration />} />
-          <Route path="log" element={<Login />} />
           <Route path="user/*" element={<Profile />}>
             <Route path="profile" element={<UserProfile />} />
             <Route path="course/*">

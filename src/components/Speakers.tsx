@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { images } from "../assets/img";
 const Speakers: React.FC = () => {
-  let count: number;
+  let count: number = 8;
   let screen = window.screen.width;
   if (screen > 1200) count = 8;
   if (screen < 1200 && screen > 850) count = 6;

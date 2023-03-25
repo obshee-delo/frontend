@@ -5,6 +5,8 @@ import "./index.css";
 import { store } from "./redux/state";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -13,5 +15,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <App />
       </BrowserRouter>
     </Provider>
+    <ToastContainer />
   </React.StrictMode>
 );
