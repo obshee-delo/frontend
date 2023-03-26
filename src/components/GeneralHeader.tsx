@@ -1,16 +1,18 @@
 import React from "react";
 import { images } from "../assets/img";
-type GeneralHeaderProps = {
-  subtitle: string;
-  nextSubtitle: string;
-  underTitle2: string;
-  underTitle: string;
-  rv: string;
-  btn: any;
-  fz: number;
-  useData: any;
-};
-const GeneralHeader: React.FC<GeneralHeaderProps> = (props) => {
+import { useNavigate } from "react-router-dom";
+interface IGeneralHeaderProps {
+  subtitle?: string;
+  nextSubtitle?: string;
+  underTitle2?: string;
+  underTitle?: string;
+  rv?: string;
+  btn?: React.ReactNode;
+  fz?: number;
+  useData?: any;
+}
+const GeneralHeader: React.FC<IGeneralHeaderProps> = (props) => {
+  const navigate = useNavigate();
   return (
     <header className="pt-[90px] sm:pt-[120px] md:pt-[150px] pb-[45px] sm:pb-[80px] md:pb-[111px] mb-[50px]">
       <div className="wc px-[15px]">
@@ -21,7 +23,12 @@ const GeneralHeader: React.FC<GeneralHeaderProps> = (props) => {
                 props.subtitle ? "inline-block" : "hidden"
               } `}
             >
-              <span className="inline-block">Главная</span>
+              <span
+                onClick={() => navigate(-1)}
+                className="cursor-pointer inline-block"
+              >
+                Главная
+              </span>
               <img
                 className="inline-block mx-[5px]"
                 src={images.speakerStar1}

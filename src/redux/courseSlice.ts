@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { IRootState } from "./state";
 const handleCourse = createAsyncThunk("cource/handleCourse", async () => {
   const course = await axios.get("http://localhost:api.odschool.ru/course");
   return course.data;
@@ -26,3 +27,4 @@ const courseSlice = createSlice({
   },
 });
 export default courseSlice.reducer;
+export const courseState = (state: IRootState) => state.cource;

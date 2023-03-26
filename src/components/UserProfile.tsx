@@ -1,12 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { images } from "../assets/img";
 import { AiFillPicture } from "react-icons/ai";
 import { selectAuth } from "./../redux/authSlice";
+import { useAppSelector } from './../redux/state';
 
 const UserProfile: React.FC = () => {
   const { name, sureName, password, email, link, phone } =
-    useSelector(selectAuth);
+    useAppSelector(selectAuth);
   const data: { [key: string]: string | null } = {
     name,
     sureName,

@@ -3,11 +3,10 @@ import We from "../components/We";
 import GeneralHeader from "../components/GeneralHeader";
 import Footer from "../components/Footer";
 import Text from "../components/Text";
-
-import { useDispatch } from "react-redux";
 import { setHLogo, backLogo } from "../redux/checkRegistrationSlice";
-const About = () => {
-  const dispatch = useDispatch();
+import { useAppDispatch } from "../redux/state";
+const About:React.FC = () => {
+  const dispatch = useAppDispatch();
   React.useEffect(() => {
     dispatch(backLogo());
   }, [setHLogo]);

@@ -4,18 +4,27 @@ import AboutCourses from "../components/AboutCourses";
 import Chose from "../components/Chose";
 import GeneralHeader from "../components/GeneralHeader";
 import Footer from "../components/Footer";
-
-import { useDispatch } from "react-redux";
 import { setHLogo, backLogo } from "../redux/checkRegistrationSlice";
-const CertainCourse = ({ useData }) => {
-  const dispatch = useDispatch();
+import { useAppDispatch } from "../redux/state";
+import { useParams } from "react-router-dom";
+import {
+  certainCourceState,
+  getCertainCource,
+} from "../redux/CertainCourceSlice";
+import { useAppSelector } from "./../redux/state";
+const CertainCourse: React.FC<any> = () => {
+  const { name } = useParams();
+
+  const dispatch = useAppDispatch();
   React.useEffect(() => {
     dispatch(backLogo());
+    dispatch(getCertainCource(name));
   }, [setHLogo]);
+  const dataCource = useAppSelector(certainCourceState);
   return (
     <div className="text-[#272523] bg-[#fef3e5]">
       <GeneralHeader
-        useData={useData}
+        useData={name}
         underTitle="Подготовка к олимпиадам"
         subtitle="Обществознание"
         underTitle2="по Обществознанию"

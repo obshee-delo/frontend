@@ -2,9 +2,9 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { useSelector } from "react-redux";
 import { setHLogo } from "../redux/checkRegistrationSlice";
 import { selectAuth } from "./../redux/authSlice";
+import { useAppSelector } from './../redux/state';
 const menu: { name: string; link: string }[] = [
   {
     name: "Главная",
@@ -20,8 +20,8 @@ const menu: { name: string; link: string }[] = [
   },
 ];
 const Nav: React.FC = () => {
-  const { name } = useSelector(selectAuth);
-  const getImg = useSelector(setHLogo);
+  const { name } = useAppSelector(selectAuth);
+  const getImg = useAppSelector(setHLogo);
   const [openMenu, setOpenMenu] = React.useState<boolean>(false);
   return (
     <article className="fixed top-0 left-0 w-[100vw] py-[4px] z-50 border-b-[#383430] border border-solid">

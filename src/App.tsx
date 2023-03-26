@@ -16,7 +16,6 @@ import Video from "./components/Video";
 import { useAppDispatch } from "./redux/state";
 import { setUsers } from "./redux/authSlice";
 function App() {
-  const { elN } = useParams();
   const dispatch = useAppDispatch();
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   React.useEffect(() => {
@@ -29,7 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
 
-          <Route path={`/:${elN}`} element={<CertainCourse useData={elN} />} />
+          <Route path={`/cours/:name`} element={<CertainCourse />} />
           <Route path="about" element={<About />} />
           <Route path="course/*" element={<Course />} />
           <Route path="intensive" element={<Intensive />} />

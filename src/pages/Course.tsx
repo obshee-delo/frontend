@@ -4,11 +4,10 @@ import AboutCourses from "../components/AboutCourses";
 import Chose from "../components/Chose";
 import Footer from "../components/Footer";
 import GeneralHeader from "../components/GeneralHeader";
-
-import { useDispatch } from "react-redux";
 import { setHLogo, backLogo } from "../redux/checkRegistrationSlice";
+import { useAppDispatch } from "../redux/state";
 const Course = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   React.useEffect(() => {
     dispatch(backLogo());
   }, [setHLogo]);

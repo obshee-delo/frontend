@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { images } from "../assets/img";
 import { duraction } from "../assets/text";
 import Title from "./Title";
@@ -27,8 +27,8 @@ const Duraction: React.FC = () => {
             ${el.color && el.color === "black" ? `bg-[#272523] text-white` : ""}
             `}
             >
-              <Link to={`/${el.name}`}>
-                {el.name ? (
+              {el.name ? (
+                <Link to={`/cours/${el.name}`}>
                   <div className={`p-[25px]`}>
                     <small className="mb-[50px] inline-block text-[22px] md:text-[26px] font-normal sm:font-semibold">
                       {el.name && el.name}
@@ -41,12 +41,12 @@ const Duraction: React.FC = () => {
                       )}
                     </div>
                   </div>
-                ) : (
-                  <div className=" hidden md:flex justify-center items-center w-full h-full">
-                    <img className="" src={el.imgStar} alt="" />
-                  </div>
-                )}
-              </Link>
+                </Link>
+              ) : (
+                <div className=" hidden md:flex justify-center items-center w-full h-full">
+                  <img className="" src={el.imgStar} alt="" />
+                </div>
+              )}
             </article>
           ))}
         </div>

@@ -10,11 +10,10 @@ import Teachers from "../components/Teachers";
 import Wait from "../components/Wait";
 import Week from "../components/Week";
 import FeedBack from "../components/FeedBack";
-
-import { useDispatch } from "react-redux";
 import { setHLogo, backLogo } from "../redux/checkRegistrationSlice";
+import { useAppDispatch } from "../redux/state";
 const Intensive = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   React.useEffect(() => {
     dispatch(backLogo());
   }, [setHLogo]);

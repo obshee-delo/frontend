@@ -2,7 +2,6 @@ import React from "react";
 import { questions } from "../assets/text";
 import Btn from "./Btn";
 import Title from "./Title";
-import { BsArrowDownRight } from "react-icons/bs";
 import { images } from "../assets/img";
 const Questions: React.FC = () => {
   return (

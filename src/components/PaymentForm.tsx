@@ -1,18 +1,18 @@
 import React from "react";
 import { sendPeayload } from "./../redux/paymentSlice";
-import { useDispatch } from "react-redux";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { useAppDispatch } from "../redux/state";
 interface IPaymentData {
   sum: number;
   idB: number;
   paymentType: string;
 }
-const PaymentForm: React.FC<number | null> = ({ idB, open, setOpen }) => {
+const PaymentForm: React.FC<{[key:string]: number} | null> = ({ idB, open, setOpen }) => {
   const [suma, setSuma] = React.useState<number>(0);
   const [card, setCard] = React.useState<string>("");
   const [paymentType, setPaymentType] = React.useState<string>("");
-  const disptch = useDispatch();
-  const send = (el, obj: IPaymentData): void => {
+  const disptch = useAppDispatch();
+  const send = (el: any, obj: IPaymentData): void => {
     el.preventDefault();
     console.log(obj);
     disptch(sendPeayload(obj));

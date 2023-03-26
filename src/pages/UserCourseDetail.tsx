@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { backPage, coursesState } from "../redux/changePage";
+import { useAppDispatch, useAppSelector } from './../redux/state';
 
 const UserCourseDetail = () => {
-  const getData = useSelector(coursesState);
-  const dispatch = useDispatch();
+  const getData = useAppSelector(coursesState);
+  const dispatch = useAppDispatch();
   const navig = useNavigate();
   const back = () => {
     navig(-1);

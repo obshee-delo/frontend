@@ -6,11 +6,11 @@ import Header from "../components/Header";
 import More from "../components/More";
 import Sooner from "../components/Sooner";
 import Speakers from "../components/Speakers";
-import { useDispatch } from "react-redux";
 import { setHLogo, backLogo } from "../redux/checkRegistrationSlice";
+import { useAppDispatch } from "../redux/state";
 
 const Main = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   React.useEffect(() => {
     dispatch(backLogo());
   }, [setHLogo]);
